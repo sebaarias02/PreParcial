@@ -20,10 +20,10 @@ public class Imagenes {
     
     // Metodos
     public String getSrc(){
-    return src;
+        return src;
     }
     
     public void setSrc(String src){
-    this.src = src;
+        this.src = src;
     }
 }
