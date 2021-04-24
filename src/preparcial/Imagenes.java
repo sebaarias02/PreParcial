@@ -11,21 +11,75 @@ package preparcial;
  */
 public class Imagenes {
     // atributos
-    private String src;
+    private String imgComprimida;
+    private String imgDescomprimida;
     
     // Constructor
     public Imagenes (String src){
         
     }
-    
+   
     // Metodos
-    public String getSrc(){
-        return src;
+    public String getImgComprimida(){
+        return imgComprimida;
     }
     
-    public void setSrc(String src){
-        this.src = src;
+    public void setImgComprimida(String img){
+        this.imgComprimida = img;
     }
+    
+    public String getImgDescomprimida(){
+        return imgDescomprimida;
+    }
+    
+    public void setImgDescomprimida(String img){
+        this.imgDescomprimida = img;
+    }
+    
+    public void comprimir(String img){
+        
+        int cant = 1;
+        char imagen[] = img.toCharArray(); // Convertir cadena en array de caracteres
+        char caracter = imagen[0]; // Asigno el primero elemento del array a la variable caracter
+        String comprimido = "";
+        
+        for(int i = 0; i < (imagen.length-1); i++){ 
+
+            if (caracter == imagen[i+1]){ // Comparar si una caracter es igual al caracter siguiente en el array
+                cant++; // Incrementamos la variable
+            }
+            else
+            {   
+                comprimido+= comprimirCadena(cant, caracter); // Concatena la cadena comprimida con la nueva cadena comprimida
+                
+                cant = 1; // Reseteamos la variable
+                caracter = imagen[i+1]; // Asignamos el caracter siguiente del array a la variable caracter para luego volver a comparar con el nuevo caracter
+            }
+        }
+        
+        comprimido+= comprimirCadena(cant,caracter); // Concatena la cadena comprimida con la ultima cadena comprimida
+        this.imgComprimida = comprimido; // Guarda la imagen completamente comprimida
+    }
+    
+    // Funcion para comprimir la nueva cadena
+    public String comprimirCadena(int cant, char caracter){
+        
+        String cadena = "";
+    
+        if(cant > 4){
+            
+            cadena+= "("+caracter+cant+")"; // Comprime la letra junto a su numero de veces que se repite
+        }
+        else
+        {   // Entra al else si la cantidad de letra que se repite es menor o igual a 4
+            for (int j = 0;j < cant;j++){
+                
+                cadena+= caracter; // Bucle para repetir la letra repetida
+            }
+        }
+        return cadena; // Retorna la cadena comprimida
+    }
+        
     
     public void descomprimir(String src){
         char cadena[] = src.toCharArray(); //Transforma el String en una cadena de caracteres tipo char.
