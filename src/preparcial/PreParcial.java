@@ -17,27 +17,29 @@ public class PreParcial {
         Scanner entrada = new Scanner(System.in);
         String img = "";
         Imagenes i = new Imagenes(); // Instanciamos el objeto con la clase
-        
-        System.out.println("Ingrese imagen a comprimir o descomprimir");
-        img = entrada.next();
-        
-        if (img.contains("(")) 
-        {
-            i.setImgComprimida(img);
-            i.descomprimir(img);
-            System.out.println("Imagen descomprimida:\n"+i.getImgDescomprimida());
-        }
-        else
-        if (img.length() <= 250) // Solo si la cadena contiene como maximo 250 letras entramos al if
-        {
-            i.setImgDescomprimida(img);
-            i.comprimir(img);
-            System.out.println("Imagen Comprimida:\n"+i.getImgComprimida());
-        }
-        else
-        {
-            System.out.println("Imagen muy grande, intentelo devuelta con una longitud maxima de 250 letras");
-        }
+        boolean valido;
+        do{
+            valido=true;
+            System.out.println("Ingrese imagen a comprimir o descomprimir (0 SALIR): ");
+            img = entrada.next();
+            i.setImagen(img);
+            if(!img.equals("0")){
+                if (img.contains("(")) {
+                    i.descomprimir(img);
+                    if(i.getImagen().length() <= 250)
+                        System.out.println("Imagen descomprimida:\n"+i.getImagen());
+                    else
+                        System.out.println("Imagen muy grande, intentelo devuelta con una longitud maxima de 250 letras");
+                }else
+                    if (img.length() <= 250){ // Solo si la cadena contiene como maximo 250 letras entramos al if
+                        i.comprimir(img);
+                        System.out.println("Imagen Comprimida:\n"+i.getImagen());
+                    }else{
+                        System.out.println("Imagen muy grande, intentelo devuelta con una longitud maxima de 250 letras");
+                    }
+            }else{
+                valido = false;
+            }
+        }while(valido);
     }
-    
 }

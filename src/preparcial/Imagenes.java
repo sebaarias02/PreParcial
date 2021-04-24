@@ -11,33 +11,25 @@ package preparcial;
  */
 public class Imagenes {
     // atributos
+    private String imagen;
     private String imgComprimida;
     private String imgDescomprimida;
     
     // Constructor
-    public Imagenes (String src){
+    public Imagenes (){
         
     }
    
     // Metodos
-    public String getImgComprimida(){
-        return imgComprimida;
+    public String getImagen(){
+        return imagen;
     }
     
-    public void setImgComprimida(String img){
-        this.imgComprimida = img;
-    }
-    
-    public String getImgDescomprimida(){
-        return imgDescomprimida;
-    }
-    
-    public void setImgDescomprimida(String img){
-        this.imgDescomprimida = img;
+    public void setImagen(String img){
+        this.imagen = img;
     }
     
     public void comprimir(String img){
-        
         int cant = 1;
         char imagen[] = img.toCharArray(); // Convertir cadena en array de caracteres
         char caracter = imagen[0]; // Asigno el primero elemento del array a la variable caracter
@@ -58,7 +50,7 @@ public class Imagenes {
         }
         
         comprimido+= comprimirCadena(cant,caracter); // Concatena la cadena comprimida con la ultima cadena comprimida
-        this.imgComprimida = comprimido; // Guarda la imagen completamente comprimida
+        this.imagen = comprimido; // Guarda la imagen completamente comprimida
     }
     
     // Funcion para comprimir la nueva cadena
@@ -83,10 +75,10 @@ public class Imagenes {
     
     public void descomprimir(String src){
         char cadena[] = src.toCharArray(); //Transforma el String en una cadena de caracteres tipo char.
-        char [] cadenaNueva = new char[150]; //La cadena descomprimida.
+        char [] cadenaNueva = new char[1000]; //La cadena descomprimida.
         int k=0; //Ir guardando los datos en la cadena descomprimida.
-        int guardo=0; //Guarda la posición de la letra.
-        int repite = 0; //Guarda el numero de veces que se repite la letra.
+        int guardo; //Guarda la posición de la letra.
+        int repite; //Guarda el numero de veces que se repite la letra.
         for(int i=0; i<cadena.length; i++){ //Recorre toda la cadena
             if(cadena[i] == '('){ //Si se repite muchas veces una letra.
                 i=i+2; //Me paro en la posicion del numero.
@@ -108,8 +100,10 @@ public class Imagenes {
                 k++;
             }
         }
-        System.out.println("Mostrando cadena:");
-        System.out.println(cadenaNueva);
+        String descomprimida = "";
+        for(int i=0; i<k; i++){
+            descomprimida=descomprimida+Character.toString(cadenaNueva[i]);
+        }
+        this.imagen = descomprimida;
     }
-    
 }
